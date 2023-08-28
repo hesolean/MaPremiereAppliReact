@@ -45,10 +45,10 @@ function App(props) {
         role="list"
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading">
-        <Todo name="Manger" completed={true} />
-        <Todo name="Dormir" completed={false} />
-        <Todo name="Travailler" completed={false} />
-        <Todo name="Jouer" completed={false} />
+        <Todo name="Manger" completed={true} id="todo-0" />
+        <Todo name="Dormir" completed={false} id="todo-1" />
+        <Todo name="Travailler" completed={false} id="todo-2" />
+        <Todo name="Jouer" completed={false} id="todo-3" />
 
       </ul>
     </div>
