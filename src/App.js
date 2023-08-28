@@ -1,4 +1,5 @@
 import React from 'react';
+import Todo from './components/Todo';
 
 function App(props) {
   const subject = props.subject;
@@ -44,54 +45,11 @@ function App(props) {
         role="list"
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading">
-        <li className="todo stack-small">
-          <div className="c-cb">
-            <input id="todo-0" type="checkbox" defaultChecked={true} />
-            <label className="todo-label" htmlFor="todo-0">
-              Manger
-            </label>
-          </div>
-          <div className="btn-group">
-            <button type="button" className="btn">
-              Éditer <span className="visually-hidden">Manger</span>
-            </button>
-            <button type="button" className="btn btn__danger">
-              Supprimer <span className="visually-hidden">Manger</span>
-            </button>
-          </div>
-        </li>
-        <li className="todo stack-small">
-          <div className="c-cb">
-            <input id="todo-1" type="checkbox" />
-            <label className="todo-label" htmlFor="todo-1">
-              Dormir
-            </label>
-          </div>
-          <div className="btn-group">
-            <button type="button" className="btn">
-              Éditer <span className="visually-hidden">Dormir</span>
-            </button>
-            <button type="button" className="btn btn__danger">
-              Supprimer <span className="visually-hidden">Dormir</span>
-            </button>
-          </div>
-        </li>
-        <li className="todo stack-small">
-          <div className="c-cb">
-            <input id="todo-2" type="checkbox" />
-            <label className="todo-label" htmlFor="todo-2">
-              Recommencer
-            </label>
-          </div>
-          <div className="btn-group">
-            <button type="button" className="btn">
-              Éditer <span className="visually-hidden">Recommencer</span>
-            </button>
-            <button type="button" className="btn btn__danger">
-              Supprimer <span className="visually-hidden">Recommencer</span>
-            </button>
-          </div>
-        </li>
+        <Todo name="Manger" completed={true} />
+        <Todo name="Dormir" completed={false} />
+        <Todo name="Travailler" completed={false} />
+        <Todo name="Jouer" completed={false} />
+
       </ul>
     </div>
   );
