@@ -1,5 +1,7 @@
 import React from 'react';
 import Todo from './components/Todo';
+import Form from './components/Form';
+import FilterButton from './components/FilterButton';
 
 function App(props) {
   // transforme le tableau DATA en tableau ne contenant que le nom des tâches
