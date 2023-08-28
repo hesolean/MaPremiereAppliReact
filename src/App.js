@@ -2,7 +2,13 @@ import React from 'react';
 import Todo from './components/Todo';
 
 function App(props) {
-  const subject = props.subject;
+  // transforme le tableau DATA en tableau ne contenant que le nom des tâches
+  //const taskList = props.task?.map((task) => task.name);
+  // mais on perd la mise en forme alors on fait :
+  const taskList = props.tasks.map(
+    (task) => (
+    <Todo id={task.id} name={task.name} completed={task.completed} />
+  ));
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
@@ -45,11 +51,7 @@ function App(props) {
         role="list"
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading">
-        <Todo name="Manger" completed={true} id="todo-0" />
-        <Todo name="Dormir" completed={false} id="todo-1" />
-        <Todo name="Travailler" completed={false} id="todo-2" />
-        <Todo name="Jouer" completed={false} id="todo-3" />
-
+        {taskList}
       </ul>
     </div>
   );
