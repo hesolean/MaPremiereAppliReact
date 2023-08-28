@@ -1,6 +1,12 @@
 import React from "react";
 
 function Form(props) {
+    function handleSubmit(e) {
+        e.preventDefault();
+        // utilisation de la prop de App
+        props.addTask("message d'alerte");
+    };
+    
     return (
         <form onSubmit={handleSubmit}>
             <h2 className="label-wrapper">
@@ -22,8 +28,4 @@ function Form(props) {
     );
 }
 
-function handleSubmit(e) {
-    e.preventDefault();
-    alert("message d'alerte");
-}
 export default Form;
