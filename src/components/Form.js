@@ -2,7 +2,7 @@ import React from "react";
 
 function Form(props) {
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <h2 className="label-wrapper">
             <label htmlFor="new-todo-input" className="label__lg">
                 Qu'y a-t-il à faire&nbsp;?
@@ -22,4 +22,8 @@ function Form(props) {
     );
 }
 
+function handleSubmit(e) {
+    e.preventDefault();
+    alert("message d'alerte");
+}
 export default Form;
