@@ -7,7 +7,11 @@ function App(props) {
   // mais on perd la mise en forme alors on fait :
   const taskList = props.tasks.map(
     (task) => (
-    <Todo id={task.id} name={task.name} completed={task.completed} />
+    <Todo 
+      id={task.id} 
+      name={task.name} 
+      completed={task.completed} 
+      key={task.id} />
   ));
   return (
     <div className="todoapp stack-large">
