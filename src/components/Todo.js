@@ -13,7 +13,7 @@ export default function Todo(props) {
      */
     function handleChange(e) {
         console.log(e.target.value)
-        setNewName(e.target.name);
+        setNewName(e.target.value);
     };
 
     /**
@@ -22,9 +22,6 @@ export default function Todo(props) {
      */
     function handleSubmit(e) {
         e.preventDefault();
-        if (!newName.trim()) {
-            return;
-        };
         props.editTask(props.id, newName);
         setNewName("");
         setEditing(false);
@@ -38,10 +35,10 @@ export default function Todo(props) {
               Nouveau nom de {props.name}
             </label>
             <input 
-                id={props.id} 
-                className="todo-text" 
                 type="text" 
-                value={newName || props.name} 
+                id={props.id} 
+                className="todo-text"
+                value={newName} 
                 onChange={handleChange}
             />
           </div>
