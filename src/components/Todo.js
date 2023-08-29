@@ -4,14 +4,46 @@ export default function Todo(props) {
     // ajout d'un hook pour la modification d'une tâche
     const [isEditing, setEditing] = useState(false);
 
+    // ajout d'un hook pour le nouveau nom de la tache
+    const [newName, setNewName] = useState("");
+
+    /**
+     * prend en compte le champ input pour modifier le nom de la tache
+     * @param {e} e 
+     */
+    function handleChange(e) {
+        console.log(e.target.value)
+        setNewName(e.target.name);
+    };
+
+    /**
+     * récupère le nouveau nom au moment de la soumission et remets el champ à 0
+     * @param {e} e 
+     */
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (!newName.trim()) {
+            return;
+        };
+        props.editTask(props.id, newName);
+        setNewName("");
+        setEditing(false);
+    }
+
     // ajout d'une interface utilisateur pour faire la modification
     const editingTemplate = (
-        <form className="stack-small">
+        <form className="stack-small" onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="todo-label" htmlFor={props.id}>
               Nouveau nom de {props.name}
             </label>
-            <input id={props.id} className="todo-text" type="text" />
+            <input 
+                id={props.id} 
+                className="todo-text" 
+                type="text" 
+                value={newName || props.name} 
+                onChange={handleChange}
+            />
           </div>
           <div className="btn-group">
             <button 
@@ -24,7 +56,7 @@ export default function Todo(props) {
             </button>
             <button type="submit" className="btn btn__primary todo-edit">
               Enregistrer
-              <span className="visually-hidden">new name for {props.name}</span>
+              <span className="visually-hidden">Nouveau nom pour {props.name}</span>
             </button>
           </div>
         </form>
