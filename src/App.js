@@ -26,6 +26,15 @@ function App(props) {
     setTasks(updatedTask);
   };
 
+  /**
+   * suppression d'une tâche
+   * @param {id} id tâche à supprimer
+   */
+  function deleteTask(id) {
+    const remainingTask = tasks.filter((task) => id !== task.id);
+    setTasks(remainingTask);
+  };
+
   // transforme le tableau DATA en tableau ne contenant que le nom des tâches
   //const taskList = props.task?.map((task) => task.name);
   // mais on perd la mise en forme alors on fait :
@@ -37,7 +46,9 @@ function App(props) {
       completed={task.completed} 
       key={task.id}
       // ajout de toggle pour synchroniser les taches cochées
-      toggleTaskCompleted={toggleTaskCompleted} />
+      toggleTaskCompleted={toggleTaskCompleted} 
+      // ajout de l'option suppression d'une tâche
+      deleteTask={deleteTask} />
   ));
 
   // création d'une fonction prop callback pour récupérer les données du l'enfant Form
