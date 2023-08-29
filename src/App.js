@@ -28,6 +28,10 @@ function App(props) {
     setTasks([...tasks, newTask]);
   };
   
+  // on ajoute une variable pour avoir le bon nombre de taches restantes en tenant compte du pluriel
+  const taskWords = taskList.length !== 1 ? "tâches restantes" : "tâche restante";
+  const headingText = `${taskList.length} ${taskWords}`;
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
@@ -40,7 +44,7 @@ function App(props) {
         <FilterButton />
         <FilterButton />
       </div>
-      <h2 id="list-heading">3 tâches restantes</h2>
+      <h2 id="list-heading">{headingText}</h2>
       <ul
         role="list"
         className="todo-list stack-large stack-exception"
