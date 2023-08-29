@@ -22,13 +22,14 @@ function Form(props) {
      */
     function handleSubmit(e) {
         e.preventDefault();
+        // alerte si le champs est vide
         if (name !== "") {
             // utilisation de la prop de App pour donner le nom de la tache saisie dans l'input
             props.addTask(name);
             // on rappelle setName("") pour repasser le champs à vide quand la tache est ajoutée
             setName("");
         } else {
-            props.addTask("Le champs est vide")
+            alert("Le champs est vide");
         }
         
     };

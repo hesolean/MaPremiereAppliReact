@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
 
 function App(props) {
+  // hook pour préserver l'état initial de props.task
+  const [tasks, setTasks] = useState(props.tasks);
+
   // transforme le tableau DATA en tableau ne contenant que le nom des tâches
   //const taskList = props.task?.map((task) => task.name);
   // mais on perd la mise en forme alors on fait :
-  const taskList = props.tasks.map(
+  const taskList = tasks.map( // on transforme props.tasks en tasks grâce au hook ajouté plus haut
     (task) => (
     <Todo 
       id={task.id} 
@@ -18,7 +21,10 @@ function App(props) {
 
   // création d'une fonction prop callback pour récupérer les données du l'enfant Form
   function addTask(name) {
-    alert(name);
+    // on commence par recomposer un objet pour la nouvelle tache
+    const newTask = {id: "id", name, completed: false};
+    // on utilise la décomposition de tableau pour ajouter la nouvelle tache à la fin du tableau
+    setTasks([...tasks, newTask]);
   };
   
   return (
