@@ -111,7 +111,16 @@ function App(props) {
   // sauf pour les balises naturellement focussable comme les boutons, les inputs ...
   const listHeadingRef = useRef("null");
 
+  // const qui permet de savoir combien il y avait de tâches avant un ajout ou une suppression
   const prevTaskLength = usePrevious(tasks.length);
+/**
+ * permet de repositionner le curseur si on a supprimé une tache
+ */
+  useEffect(() => {
+    if (tasks.length - prevTaskLength === -1) {
+      listHeadingRef.current.focus();
+    }
+  }, [tasks.length, prevTaskLength]);
 
   return (
     <div className="todoapp stack-large">
