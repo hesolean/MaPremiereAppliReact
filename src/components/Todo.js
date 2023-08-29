@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function Todo(props) {
     // ajout d'un hook pour la modification d'une tâche
@@ -6,6 +6,10 @@ export default function Todo(props) {
 
     // ajout d'un hook pour le nouveau nom de la tache
     const [newName, setNewName] = useState("");
+
+    // ajout de 2 constantes pour définir la position du curseur quand le composant sera appelé
+    const editFieldRef = useRef(null);
+    const editButtonRef = useRef(null);
 
     /**
      * prend en compte le champ input pour modifier le nom de la tache
@@ -39,7 +43,8 @@ export default function Todo(props) {
                 id={props.id} 
                 className="todo-text"
                 value={newName} 
-                onChange={handleChange}
+                onChange={handleChange} 
+                ref={editFieldRef}
             />
           </div>
           <div className="btn-group">
@@ -75,7 +80,8 @@ export default function Todo(props) {
             <button 
                 type="button" 
                 className="btn" 
-                onClick={() => setEditing(true)}
+                onClick={() => setEditing(true)} 
+                ref={editButtonRef}
             >
               Modifier <span className="visually-hidden">{props.name}</span>
             </button>
@@ -88,9 +94,17 @@ export default function Todo(props) {
           </div>
         </div>
       );
-      
 
     console.log(props);
+
+    // ajout de useEffect pour compléter le useRef
+    useEffect(() => {
+        if (isEditing) {
+            editFieldRef.current.focus();
+        };
+    }, [isEditing] //tableau pour dire que le focus ne se fait que dans le cas de l'édition
+    );
+
     return (
         // <li className="todo stack-small">
         //     <div className="c-cb">
@@ -120,7 +134,7 @@ export default function Todo(props) {
         //         </button>
         //     </div>
         // </li>
-
+        
         // on utilise la vue en focntion de ce que l'utilisateur veut faire
         <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>
     );
