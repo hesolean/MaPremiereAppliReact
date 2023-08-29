@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
+import { nanoid } from 'nanoid';
 
 function App(props) {
   // hook pour préserver l'état initial de props.task
@@ -22,7 +23,7 @@ function App(props) {
   // création d'une fonction prop callback pour récupérer les données du l'enfant Form
   function addTask(name) {
     // on commence par recomposer un objet pour la nouvelle tache
-    const newTask = {id: "id", name, completed: false};
+    const newTask = {id: `todo-${nanoid()}`, name, completed: false};
     // on utilise la décomposition de tableau pour ajouter la nouvelle tache à la fin du tableau
     setTasks([...tasks, newTask]);
   };
