@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import usePrevious from "../usePrevious";
 
 export default function Todo(props) {
     // ajout d'un hook pour la modification d'une tâche
@@ -10,6 +11,9 @@ export default function Todo(props) {
     // ajout de 2 constantes pour définir la position du curseur quand le composant sera appelé
     const editFieldRef = useRef(null);
     const editButtonRef = useRef(null);
+
+    // permet de pister si l'état précédent du composant était en mode édition
+    const wasEditing = usePrevious(isEditing);
 
     /**
      * prend en compte le champ input pour modifier le nom de la tache
@@ -99,10 +103,14 @@ export default function Todo(props) {
 
     // ajout de useEffect pour compléter le useRef
     useEffect(() => {
-        if (isEditing) {
+        if (!wasEditing && isEditing) {
             editFieldRef.current.focus();
+        }
+        if (wasEditing && !isEditing) {
+            //le curseur se met sur le bouton modifié quand on a enregistré le nouveau nom
+            editButtonRef.current.focus();
         };
-    }, [isEditing] //tableau pour dire que le focus ne se fait que dans le cas de l'édition
+    }, [wasEditing, isEditing] //tableau pour dire de quoi dépend le fonctionnement de useEffect()
     );
 
     return (

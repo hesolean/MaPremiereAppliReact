@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
 import { nanoid } from 'nanoid';
+import usePrevious from './usePrevious';
 
 // definition des fonctions qui vont servir à filtrer
 const FILTER_MAP = {
@@ -105,6 +106,13 @@ function App(props) {
   const taskWords = taskList.length !== 1 ? "tâches restantes" : "tâche restante";
   const headingText = `${taskList.length} ${taskWords}`;
 
+  // ajout d'une constante pour la position du curseur 
+  // on ajoute les éléments de la liste par tabindex="-1" dans les balises directement
+  // sauf pour les balises naturellement focussable comme les boutons, les inputs ...
+  const listHeadingRef = useRef("null");
+
+  const prevTaskLength = usePrevious(tasks.length);
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
@@ -115,7 +123,11 @@ function App(props) {
       <div className="filters btn-group stack-exception">
         {filterList}
       </div>
-      <h2 id="list-heading">{headingText}</h2>
+      <h2 
+        id="list-heading" 
+        tabIndex="-1" 
+        ref={listHeadingRef}
+      >{headingText}</h2>
       <ul
         role="list"
         className="todo-list stack-large stack-exception"
