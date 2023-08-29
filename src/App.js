@@ -8,6 +8,24 @@ function App(props) {
   // hook pour préserver l'état initial de props.task
   const [tasks, setTasks] = useState(props.tasks);
 
+  /**
+   * ajout de la synchronisation des tâches completées
+   * @param {id} id tâche à modifier
+   */
+  function toggleTaskCompleted(id) {
+    const updatedTask = tasks.map((task) => {
+      // on cherche dans le tableau la tâche qui a changé
+      if (id === task.id) {
+        // on inverse la situation de la tache en utilisant la décomposition d'objet
+        return { ...task, completed: !task.completed}
+      }
+      // on retourne la tache màj
+      return task;
+    });
+    // on màj le tableau de tâches
+    setTasks(updatedTask);
+  };
+
   // transforme le tableau DATA en tableau ne contenant que le nom des tâches
   //const taskList = props.task?.map((task) => task.name);
   // mais on perd la mise en forme alors on fait :
@@ -17,7 +35,9 @@ function App(props) {
       id={task.id} 
       name={task.name} 
       completed={task.completed} 
-      key={task.id} />
+      key={task.id}
+      // ajout de toggle pour synchroniser les taches cochées
+      toggleTaskCompleted={toggleTaskCompleted} />
   ));
 
   // création d'une fonction prop callback pour récupérer les données du l'enfant Form
