@@ -23,7 +23,12 @@ function App(props) {
   
   // ajout d'une constant pour avoir la liste des filtres
   const filterList = FILTER_NAMES.map((name) => (
-    <FilterButton key={name} name={name} />
+    <FilterButton 
+      key={name} 
+      name={name} 
+      isPressed={name === filter}
+      setFilter={setFilter}
+    />
   ));
 
   /**
@@ -71,18 +76,21 @@ function App(props) {
   // transforme le tableau DATA en tableau ne contenant que le nom des tâches
   //const taskList = props.task?.map((task) => task.name);
   // mais on perd la mise en forme alors on fait :
-  const taskList = tasks.map( // on transforme props.tasks en tasks grâce au hook ajouté plus haut
-    (task) => (
-    <Todo 
-      id={task.id} 
-      name={task.name} 
-      completed={task.completed} 
-      key={task.id}
-      // ajout de toggle pour synchroniser les taches cochées
-      toggleTaskCompleted={toggleTaskCompleted} 
-      // ajout de l'option suppression d'une tâche
-      deleteTask={deleteTask}
-      editTask={editTask} />
+  const taskList = tasks
+  // on ajoute les filtres dans la liste de taches pour activer les fonctionnalités des boutons
+    .filter(FILTER_MAP[filter])
+    .map( (task) => (
+      // on transforme props.tasks en tasks grâce au hook ajouté plus haut
+      <Todo 
+        id={task.id} 
+        name={task.name} 
+        completed={task.completed} 
+        key={task.id}
+        // ajout de toggle pour synchroniser les taches cochées
+        toggleTaskCompleted={toggleTaskCompleted} 
+        // ajout de l'option suppression d'une tâche
+        deleteTask={deleteTask}
+        editTask={editTask} />
   ));
 
   // création d'une fonction prop callback pour récupérer les données du l'enfant Form
