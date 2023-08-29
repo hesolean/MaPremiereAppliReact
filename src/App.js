@@ -4,9 +4,27 @@ import Form from './components/Form';
 import FilterButton from './components/FilterButton';
 import { nanoid } from 'nanoid';
 
+// definition des fonctions qui vont servir à filtrer
+const FILTER_MAP = {
+  All: () => true,
+  Active: (task) => !task.completed,
+  Completed: (task) => task.completed
+};
+// definition de cles des filtres
+const FILTER_NAMES = Object.keys(FILTER_MAP);
+// les filtres sont créés en dehors de la fonction App pour qu'ils restent constants quoiqu'il arrive dans l'appli
+
 function App(props) {
   // hook pour préserver l'état initial de props.task
   const [tasks, setTasks] = useState(props.tasks);
+
+  // ajout d'un tableau pour les titres des filtres avec "All" car ils vont tous s'afficher en même temps
+  const [filter, setFilter] = useState("All");
+  
+  // ajout d'une constant pour avoir la liste des filtres
+  const filterList = FILTER_NAMES.map((name) => (
+    <FilterButton key={name} name={name} />
+  ));
 
   /**
    * ajout de la synchronisation des tâches completées
@@ -87,9 +105,7 @@ function App(props) {
       <Form addTask={addTask} />
       
       <div className="filters btn-group stack-exception">
-        <FilterButton />
-        <FilterButton />
-        <FilterButton />
+        {filterList}
       </div>
       <h2 id="list-heading">{headingText}</h2>
       <ul
