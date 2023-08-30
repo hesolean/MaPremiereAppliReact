@@ -86,7 +86,7 @@ function App(props) {
         id={task.id} 
         name={task.name} 
         completed={task.completed} 
-        description={task.description}
+        describe={task.describe}
         key={task.id}
         // ajout de toggle pour synchroniser les taches cochées
         toggleTaskCompleted={toggleTaskCompleted} 

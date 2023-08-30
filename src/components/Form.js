@@ -4,6 +4,7 @@ function Form(props) {
     // name : valeur initiale 'Utiliser les hooks", setName() : fonction qui modifie name
     // useState() renvoie les 2 valeurs
     const [name, setName] = useState("");
+    const [describe, setDescribe] = useState("");
 
     /**
      * fonction qui permet de récupérer la valeur saisie dans le champs pour modifier la valeur de name
@@ -50,6 +51,18 @@ function Form(props) {
                 value={name}
                 onChange={handleChange}
             />
+            <h2 className="label-wrapper">
+                <label htmlFor="new-todo-textarea" className="label__lg">
+                    Détails de ce qu'il y a à faire
+                </label>
+            </h2>            
+            <textarea 
+                id="new-todo-textarea" 
+                className="textarea textarea__lg" 
+                name="textarea" 
+                value={describe} 
+                onChange={handleChange}
+            ></textarea>
             <button type="submit" className="btn btn__primary btn__lg">
             Ajouter la tâche
             </button>
