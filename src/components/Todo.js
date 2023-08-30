@@ -77,7 +77,7 @@ export default function Todo(props) {
               onChange={() => props.toggleTaskCompleted(props.id)}
             />
             <label className="todo-label" htmlFor={props.id}>
-              {props.name}
+              {props.name} : {props.description}
             </label>
           </div>
           <div className="btn-group">
